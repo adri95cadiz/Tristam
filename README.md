@@ -1,5 +1,5 @@
 # Tristam
-Tristam stands for Training Intelligent Sequencer Tool for Adaptative Music.
+Tristam stands for Training Intelligent Sequencer Tool for Adaptive Music.
 
 It is a MultiAgent System made for musicians to train their improvisational skills.
 
