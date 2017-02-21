@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TristamSMA;
+package Listen;
 
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.AudioEvent;
@@ -12,6 +12,8 @@ import be.tarsos.dsp.pitch.PitchDetectionHandler;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.PitchProcessor;
 import be.tarsos.dsp.pitch.PitchProcessor.PitchEstimationAlgorithm;
+import es.upv.dsic.gti_ia.core.AgentID;
+import es.upv.dsic.gti_ia.core.SingleAgent;
 import java.util.ArrayList;
 import javax.sound.sampled.LineUnavailableException;
 /*import be.tarsos.dsp.onsets.ComplexOnsetDetector;
@@ -22,7 +24,7 @@ import be.hogent.tarsos.dsp.util.FFT;*/
  *
  * @author Adri
  */
-public class BPMReader {
+public class ListenAgent extends SingleAgent {
 
     private final static int MIN_TEMPO_BPM = 60;
     private final static int MAX_TEMPO_BPM = 250;
@@ -32,11 +34,15 @@ public class BPMReader {
     private static double FinishTime_ms = 0;
     private static double CurrentTime_ms = 0;
     private static int NumberSamples = 0;
+      
+    public ListenAgent(AgentID aid) throws Exception {
+        super(aid);
+    }
+    
     /**
      * @param args the command line arguments
      * @throws javax.sound.sampled.LineUnavailableException
-     */
-    
+     */  
     public static void main(String[] args) throws LineUnavailableException {
         
         final int sampleRate = 44100;        
