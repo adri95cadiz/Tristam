@@ -15,7 +15,11 @@ import be.tarsos.dsp.pitch.PitchProcessor.PitchEstimationAlgorithm;
 import es.upv.dsic.gti_ia.core.AgentID;
 import es.upv.dsic.gti_ia.core.SingleAgent;
 import java.util.ArrayList;
+import java.util.Stack;
 import javax.sound.sampled.LineUnavailableException;
+import Communication.*;
+import es.upv.dsic.gti_ia.core.ACLMessage;
+import java.util.HashMap;
 /*import be.tarsos.dsp.onsets.ComplexOnsetDetector;
 import be.tarsos.dsp.AudioProcessor;
 import be.hogent.tarsos.dsp.util.FFT;*/
@@ -23,20 +27,104 @@ import be.hogent.tarsos.dsp.util.FFT;*/
 /**
  *
  * @author Adri
+ * 
+ * Este agente se encarga de escuchar el instrumento de entrada y parametrizar la reproducción de los loops.
+ * 
  */
 public class ListenAgent extends SingleAgent {
 
     private final static int MIN_TEMPO_BPM = 60;
     private final static int MAX_TEMPO_BPM = 250;
     private final static int MAX_NOTES_KEY = 15;
-    //Para el tempo total.
+    //Para el bpm total.
     private static double StartTime_ms = 0;
     private static double FinishTime_ms = 0;
     private static double CurrentTime_ms = 0;
     private static int NumberSamples = 0;
+    //Para el funcionamiento del agente.
+    private static int NumParameter = 0;
+    private static Stack<String> pilaParametros = new Stack<>();   
+    private static HashMap<String, ACLMessage> hashmapMensajes = new HashMap<String, ACLMessage>() {};
+    private static boolean fin = false;
+    private final static int MAX_MESSAGES = 20;
       
     public ListenAgent(AgentID aid) throws Exception {
         super(aid);
+    }
+    
+    public void init() {
+        System.out.println("Agente "+this.getAid()+" iniciado");
+        /* Envio mensaje conexión inicial a Filter. */
+        this.sendParameters("Filter", "connectionBegin");   
+        /* Envio mensaje conexión inicial a Director. */
+        this.sendParameters("Director", "connectionBegin");   
+        /* Envio mensaje conexión inicial a Interface. */
+        this.sendParameters("Interface", "connectionBegin");   
+    }
+     
+    public void execute() {
+        while(!fin){
+            if(!pilaParametros.isEmpty()) {                         // Hay parámetros analizados esperando a ser enviados.
+                String parameters = pilaParametros.pop();
+                /* Envio cadena parámetros a Filter. */
+                this.sendParameters("Filter", parameters);            
+                /* Envio cadena parámetros a Director. */
+                this.sendParameters("Director", parameters);
+                /* Envio cadena parámetros a Interface. */
+                this.sendParameters("Interface", parameters);
+                NumParameter++;
+            } else if (hashmapMensajes.size() > MAX_MESSAGES) {     // Si hay demasiados mensajes en espera se finaliza.                
+                System.out.println(this.getAid() + ": Demasiados mensajes en espera: " + hashmapMensajes.size() + ". FINALIZANDO");
+                fin = true;
+            }    
+        }  
+    }
+     
+    public void finalize() {
+        System.out.println("Agente "+this.getAid()+" finalizando");
+        super.finalize();        
+    }        
+    
+    /**
+     * 
+     * @param receiver Receptor de los parámetros.
+     * @param content Cadena JSON con los parámetros.
+     */    
+    private void sendParameters(String receiver, String content) {
+        ACLMessage msjSalida = new ACLMessage(ACLMessage.REQUEST);
+        msjSalida.setSender(this.getAid());
+        msjSalida.setReceiver(new AgentID(receiver));
+        msjSalida.setContent(content);
+        msjSalida.setConversationId(this.getAid()+" to "+receiver);
+        msjSalida.setReplyWith("parameters"+NumParameter+"to"+receiver);
+        this.send(msjSalida);
+        hashmapMensajes.put(msjSalida.getReplyWith(), msjSalida);
+        System.out.println(this.getAid() + ": Parámetros enviados a " + receiver);
+    }    
+    
+    public void onMessage(ACLMessage msg) {
+        if(msg.getPerformativeInt() == ACLMessage.AGREE){           // AGREE recibido.     
+            if( hashmapMensajes.containsKey(msg.getReplyWith()) ) {               
+                System.out.println(this.getAid() + ": Parámetros recibidos por " + msg.getSender() + ". ID mensaje: " + msg.getReplyWith());
+            } else {
+                System.out.println(this.getAid() + ": Agree recibido desde " + msg.getSender() + " no registrado. ID mensaje: " + msg.getReplyWith());
+            }
+        } else if(msg.getPerformativeInt() == ACLMessage.INFORM){   // INFORM recibido.
+            if(msg.getContent().contains("OK")){                    // INFORM<OK>.          
+                if(hashmapMensajes.containsKey(msg.getReplyWith()) ) {
+                    System.out.println(this.getAid() + ": OK recibido por " + msg.getSender() + ". ID mensaje: " + msg.getReplyWith());    
+                    hashmapMensajes.remove(msg.getReplyWith());
+                } else {                                            
+                    System.out.println(this.getAid() + ": OK recibido desde " + msg.getSender() + " no registrado. ID mensaje: " + msg.getReplyWith());
+                }
+            } else {                                                // INFORM<!OK>. 
+                System.out.println(this.getAid() + ": Este agente no debería recibir mensajes de tipo INFORM que no sean OK. FINALIZANDO");
+                fin = true;
+            }
+        } else {                                                    // !INFORM && !AGREE
+            System.out.println(this.getAid() + ": Este agente no debería recibir mensajes que no sean de tipo AGREE o INFORM. FINALIZANDO");
+            fin = true;
+        }
     }
     
     /**
@@ -197,7 +285,10 @@ public class ListenAgent extends SingleAgent {
                                     }
                                     //keyFinder.SetAccidental(noteArray, KeyFinder.getAccidentalVal());
                                     keyFinder.DetermineKey(noteArray);
-                                    System.out.println("Estas tocando en la clave: " + keyFinder.getKEYval());
+                                    String keySig = keyFinder.getKEYval();
+                                    System.out.println("Estas tocando en la clave: " + keySig);
+                                    String parameters = JSON.listenParameters(bpm, bpmBeat, beat, nota, octava, keySig);
+                                    pilaParametros.push(parameters);
                                 }
                             }
                         }

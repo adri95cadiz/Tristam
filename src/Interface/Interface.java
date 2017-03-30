@@ -8,6 +8,9 @@ package Interface;
 /**
  *
  * @author Adri
+ * 
+ * Esta será la ventana de la interfaz, donde se verá información relativa al desarrollo de la improvisación.
+ * 
  */
 public class Interface extends javax.swing.JFrame {
 

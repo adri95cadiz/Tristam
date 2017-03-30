@@ -7,6 +7,14 @@ package Listen;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author ece1778github
+ * 
+ * Esta clase se encarga de buscar a partir de un array de notas la clave a la que se está tocando.
+ * 
+ */
+
 public class KeyFinder {
 	
 	static int NumberOfElements;

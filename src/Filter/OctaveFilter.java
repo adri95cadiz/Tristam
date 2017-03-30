@@ -10,11 +10,27 @@ import es.upv.dsic.gti_ia.core.AgentID;
 /**
  *
  * @author Adri
+ * 
+ * Filtro de Octava.
+ * 
  */
-public class OctaveFilter extends Filter {
+public class OctaveFilter extends FilterAgent {
 
     public OctaveFilter(AgentID aid) throws Exception {
         super(aid);
     }
+        
+    public void init() {     
+        System.out.println("Agente "+this.getAid()+" iniciado");
+    }
+     
+    public void execute() {
+         
+    }
+     
+    public void finalize() {        
+        System.out.println("Agente "+this.getAid()+" finalizando");
+        super.finalize();        
+    }    
     
 }

@@ -17,5 +17,18 @@ public class CombinationAgent extends SingleAgent {
     public CombinationAgent(AgentID aid) throws Exception {
         super(aid);
     }
+        
+    public void init() {
+        System.out.println("Agente "+this.getAid()+" iniciado");
+    }
+     
+    public void execute() {
+         
+    }
+     
+    public void finalize() {
+        System.out.println("Agente "+this.getAid()+" finalizando");
+        super.finalize();        
+    }    
     
 }
