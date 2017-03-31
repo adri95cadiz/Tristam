@@ -5,6 +5,8 @@
  */
 package Player;
 
+import Loop.*;
+import java.util.Stack;
 import es.upv.dsic.gti_ia.core.AgentID;
 import es.upv.dsic.gti_ia.core.SingleAgent;
 
@@ -17,6 +19,8 @@ import es.upv.dsic.gti_ia.core.SingleAgent;
  */
 public class PlayerAgent extends SingleAgent {
 
+    private static Stack<Loop> pilaLoops = new Stack<>() ;   
+    
     public PlayerAgent(AgentID aid) throws Exception {
         super(aid);
     }

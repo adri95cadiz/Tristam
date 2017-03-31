@@ -6,7 +6,6 @@
 package Filter;
 
 import es.upv.dsic.gti_ia.core.AgentID;
-import java.util.ArrayList;
 
 /**
  *
@@ -17,14 +16,14 @@ import java.util.ArrayList;
  */
 public class MasterFilter extends FilterAgent {
       
-    private ArrayList<FilterAgent> filtros;
+    private FilterAgent filtros[] = new FilterAgent[4];
     
     public MasterFilter(AgentID aid) throws Exception {
         super(aid);
-        filtros.add(new BPMFilter(new AgentID("BPMFilter")));
-        filtros.add(new KeySigFilter(new AgentID("KeySigFilter")));
-        filtros.add(new OctaveFilter(new AgentID("OctaveFilter")));
-        filtros.add(new TimeSigFilter(new AgentID("TimeSigFilter")));
+        filtros[0] = new BPMFilter(new AgentID("BPMFilter"));
+        filtros[1] = new KeySigFilter(new AgentID("KeySigFilter"));
+        filtros[2] = new OctaveFilter(new AgentID("OctaveFilter"));
+        filtros[3] = new TimeSigFilter(new AgentID("TimeSigFilter"));
     }
         
     public void init() {

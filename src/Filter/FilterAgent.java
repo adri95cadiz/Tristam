@@ -22,7 +22,6 @@ public abstract class FilterAgent extends SingleAgent {
     }
         
     public void init() {     
-        System.out.println("Agente "+this.getAid()+" iniciado");
     }
      
     public void execute() {
@@ -30,7 +29,6 @@ public abstract class FilterAgent extends SingleAgent {
     }
      
     public void finalize() {
-        System.out.println("Agente "+this.getAid()+" finalizando");
         super.finalize();        
     }    
     
