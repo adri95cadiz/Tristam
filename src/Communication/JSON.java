@@ -10,9 +10,10 @@ package Communication;
  * @author Adri
  */
 
+import Loop.*;
+import Parameters.*;
 import com.eclipsesource.json.*;
-import es.upv.dsic.gti_ia.core.ACLMessage;
-import es.upv.dsic.gti_ia.core.AgentID;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,24 +27,74 @@ public class JSON {
     /**
      * Leemos los parámetros y creamos la cadena JSON que los contiene. 
      * @author Adri
-     * @param totalBPM BPM totales desde el inicio la improvisación.
-     * @param netoBPM BPM netos adaptados a los últimos momentos de la improvisación.
-     * @param beat duración de un beat: 1/beat.
-     * @param note nota tocada de la escala.
-     * @param octave octava de la nota tocada.
-     * @param keySig clave en la que se está tocando.
-     * 
+     * @param  parametros parametros de la reproducción para pasar a JSONObject.    
      * @return Cadena JSON de parámetros
      */
-    public static String listenParameters(double totalBPM, double netoBPM, int beat, int note, int octave, String keySig) {
+    public static String listenParameters(Parameters parametros) {
         JsonObject objeto = new JsonObject();
-        objeto.add("bpmTotal",totalBPM);
-        objeto.add("bpmAdapted",netoBPM);
-        objeto.add("beat",beat);
-        objeto.add("note",note);
-        objeto.add("octave",octave);
-        objeto.add("keySig",keySig);
+        objeto.add("bpm",parametros.getBpm());
+        objeto.add("bpmAdapted",parametros.getBpmAdapted());
+        objeto.add("beat",parametros.getBeat());
+        objeto.add("note",parametros.getNote());
+        objeto.add("octave",parametros.getOctave());
+        objeto.add("key",parametros.getKey());
+        objeto.add("key",parametros.getNum());
         return objeto.toString();     
+    }    
+    
+    public static Parameters listenParameters(String parametros) {        
+        JsonObject objeto = Json.parse(parametros).asObject();
+        Parameters parameters = new Parameters();
+        parameters.setBpm(Double.parseDouble(objeto.getString("bpm", null)));
+        parameters.setBpmAdapted(Double.parseDouble(objeto.getString("bpmAdapted", null)));
+        parameters.setBeat(Integer.parseInt(objeto.getString("beat", null)));
+        parameters.setNote(Integer.parseInt(objeto.getString("note", null)));
+        parameters.setOctave(Integer.parseInt(objeto.getString("octave", null)));
+        parameters.setKey(objeto.getString("beat", null));
+        parameters.setNum(Integer.parseInt(objeto.getString("num", null)));
+        return parameters;     
+    }    
+    
+    public static int parameterNumber(String parametros) {        
+        JsonObject objeto = Json.parse(parametros).asObject();
+        int num = Integer.parseInt(objeto.getString("num", null));
+        return num;     
+    } 
+    
+    public static String loops(ArrayList<Loop> loops, int num){    
+        JsonObject objeto = new JsonObject();
+        for(int i = 0; i<loops.size(); i++){
+            objeto.add("loop"+i, JSON.loop(loops.get(i)));
+        }
+        objeto.add("num", num);
+        return objeto.toString();
     }
     
+    public static ArrayList<Loop> loops (String jsonLoops){                  
+        JsonObject objeto = Json.parse(jsonLoops).asObject();
+        ArrayList<Loop> loops = new ArrayList<>();
+        for(int i = 0; objeto.getString("loop"+i, null) != null ; i++){
+            loops.add(JSON.loop(objeto.getString("loop"+i, null)));
+        }
+        return loops;
+    }
+    
+    public static int loopNumber (String jsonLoops){                  
+        JsonObject objeto = Json.parse(jsonLoops).asObject();
+        int num = Integer.parseInt(objeto.getString("num", null));        
+        return num;
+    }
+    
+    public static String loop(Loop loop){    
+        JsonObject objeto = new JsonObject();
+        objeto.add("loop", 1);        
+        return objeto.toString();
+    }
+    
+    public static Loop loop(String thisLoop){         
+        JsonObject objeto = Json.parse(thisLoop).asObject();
+        Loop loop = new Loop();        
+        objeto.getString("loop", null);
+        return loop;
+    }
 }

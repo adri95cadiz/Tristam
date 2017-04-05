@@ -36,7 +36,7 @@ public class AgentLauncher {
         try {
             Combination = new CombinationAgent(new AgentID("Combination"));
             Director = new DirectorAgent(new AgentID("Director"));
-            Filter = new MasterFilter(new AgentID("Filter"));
+            Filter = new MasterFilter(new AgentID("Filter"), Combination.getAid());
             Instrument = new InstrumentAgent(new AgentID("Instrument"));
             Interface = new InterfaceAgent(new AgentID("Interface"));
             Listen = new ListenAgent(new AgentID("Listen"));

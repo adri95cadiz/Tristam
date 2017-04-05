@@ -19,7 +19,7 @@ public class CombinationAgent extends SingleAgent {
     }
         
     public void init() {
-        System.out.println("Agente "+this.getAid()+" iniciado");
+        System.out.println("Agente "+this.getAid().name+" iniciado");
     }
      
     public void execute() {
@@ -27,7 +27,7 @@ public class CombinationAgent extends SingleAgent {
     }
      
     public void finalize() {
-        System.out.println("Agente "+this.getAid()+" finalizando");
+        System.out.println("Agente "+this.getAid().name+" finalizando");
         super.finalize();        
     }    
     

@@ -3,18 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Director/DirectorAgent.java</file>
+            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Interface/Interface.java</file>
             <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/DatabaseMaker/DatabaseMaker.java</file>
+            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Communication/JSON.java</file>
+            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Listen/Listen.java</file>
+            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Player/PlayerAgent.java</file>
+            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Filter/BPMFilter.java</file>
+            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Filter/FilterAgent.java</file>
+            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Loop/Loop.java</file>
+            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Director/DirectorAgent.java</file>
             <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Listen/KeyFinder.java</file>
             <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Filter/TimeSigFilter.java</file>
-            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Interface/InterfaceAgent.java</file>
             <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Filter/OctaveFilter.java</file>
-            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Filter/BPMFilter.java</file>
+            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Interface/InterfaceAgent.java</file>
             <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Filter/MasterFilter.java</file>
             <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Combination/CombinationAgent.java</file>
+            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Parameters/Parameters.java</file>
+            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Instrument/InstrumentAgent.java</file>
             <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/AgentLauncher/AgentLauncher.java</file>
-            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Filter/KeySigFilter.java</file>
             <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Listen/ListenAgent.java</file>
+            <file>file:/E:/Adri/Projects/GithubRepositories/Tristam/src/Filter/KeySigFilter.java</file>
         </group>
     </open-files>
 </project-private>

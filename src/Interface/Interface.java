@@ -13,14 +13,42 @@ package Interface;
  * 
  */
 public class Interface extends javax.swing.JFrame {
-
+    
+    private static String loop;
+    private static String parametrosJSON;
+    private static String directiva;    
+    
     /**
      * Creates new form Interface
      */
     public Interface() {
         initComponents();
     }
-
+    
+    public static void setLoop(String loop){
+        Interface.loop = loop;
+    }
+    
+    public static String getLoop(){
+        return Interface.loop;
+    }
+    
+    public static void setParametros(String parametros){
+        Interface.parametrosJSON = parametros;
+    }
+    
+    public static String getParametros(){
+        return Interface.parametrosJSON;        
+    }
+    
+    public static void setDirectiva(String directiva){
+        Interface.directiva = directiva;
+    }
+    
+    public static String getDirectiva(){
+        return Interface.directiva;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
