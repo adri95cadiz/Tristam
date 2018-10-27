@@ -12,6 +12,7 @@ import Instrument.*;
 import Interface.*;
 import Listen.*;
 import Player.*;
+import Rhythm.*;
 import es.upv.dsic.gti_ia.core.AgentsConnection;
 
 /**
@@ -23,31 +24,34 @@ public class AgentLauncher {
     
     public static void main(String[] args) throws Exception {
         MidiProcessorAgent Combination = null;
-        ComposerAgent Director = null;
+        ComposerAgent Composer = null;
         InstrumentAgent Instrument = null;
         InterfaceAgent Interface = null;
         ListenAgent Listen = null;
         PlayerAgent Player = null;
+        RhythmAgent Rhythm = null;
         
         AgentsConnection.connect("localhost", 5672, "test", "guest", "guest", false);
         
         try {
-            Combination = new MidiProcessorAgent(new AgentID("Combination"));
-            Director = new ComposerAgent(new AgentID("Director"));
+            Combination = new MidiProcessorAgent(new AgentID("MidiProcessor"));
+            Composer = new ComposerAgent(new AgentID("Composer"));
             Instrument = new InstrumentAgent(new AgentID("Instrument"));
             Interface = new InterfaceAgent(new AgentID("Interface"));
             Listen = new ListenAgent(new AgentID("Listen"));
             Player = new PlayerAgent(new AgentID("Player"));
+            Rhythm = new RhythmAgent(new AgentID("Rhythm"));
         } catch (Exception e) { 
             System.err.println("Error al crear los agentes");
             System.err.println(e);
             System.exit(1);
         }
         Combination.start();
-        Director.start();
+        Composer.start();
         Instrument.start();
         Interface.start();
         Listen.start();
         Player.start();
+        Rhythm.start();
     }
 }

@@ -56,9 +56,9 @@ public class ListenAgent extends SingleAgent {
                 String parameters = escucha.getColaParametros().get(0);
                 escucha.getColaParametros().remove(0);
                 /* Envio cadena parámetros a Filter. */
-                this.sendParameters("Filter", parameters);            
+                this.sendParameters("Player", parameters);            
                 /* Envio cadena parámetros a Director. */
-                this.sendParameters("Director", parameters);
+                this.sendParameters("Composer", parameters);
                 /* Envio cadena parámetros a Interface. */
                 this.sendParameters("Interface", parameters);
             } else if(hashmapMensajes.size() > MAX_MESSAGES) {     // Si hay demasiados mensajes en espera se finaliza.                
