@@ -20,7 +20,7 @@ public class InterfaceAgent extends SingleAgent {
     
     boolean playerConnected = false;
     boolean listenConnected = false;
-    boolean directorConnected = false;
+    boolean composerConnected = false;
     private boolean fin = false;
 
     public InterfaceAgent(AgentID aid) throws Exception {
@@ -29,7 +29,7 @@ public class InterfaceAgent extends SingleAgent {
         
     public void init() {     
         System.out.println("Agente "+this.getAid().name+" iniciado");
-        while(!playerConnected || !listenConnected || !directorConnected){}
+        while(!playerConnected || !listenConnected || !composerConnected){}
         System.out.println("Agente " + this.getAid().name + " conectado correctamente.");  
     }
      
@@ -85,13 +85,13 @@ public class InterfaceAgent extends SingleAgent {
                             fin = true;
                         } break;
                     case "Director":
-                        if(msg.getContent().equals("connectionBegin") && !directorConnected){
+                        if(msg.getContent().equals("connectionBegin") && !composerConnected){
                             System.out.println(this.getAid().name + ": Recibida conexión inicial desde " + msg.getSender().name);
-                            directorConnected = true;
+                            composerConnected = true;
                             this.informOK(msg.getSender().name, msg.getConversationId(), msg.getReplyWith());       
-                        } else if(!msg.getContent().equals("connectionBegin") && directorConnected) {
+                        } else if(!msg.getContent().equals("connectionBegin") && composerConnected) {
                             Interface.setDirectiva(msg.getContent());
-                            System.out.println(this.getAid().name + ": Directiva actualizada.");
+                            System.out.println(this.getAid().name + ": Partitura actualizada.");
                             this.informOK(msg.getSender().name, msg.getConversationId(), msg.getReplyWith());       
                         } else {                                                 
                             System.out.println(this.getAid().name + ": Recibida conexión inicial desde " + msg.getSender().name + " ya recibida anteriormente. FINALIZANDO");
@@ -104,7 +104,7 @@ public class InterfaceAgent extends SingleAgent {
                             this.informOK(msg.getSender().name, msg.getConversationId(), msg.getReplyWith());       
                         } else if(!msg.getContent().equals("connectionBegin") && playerConnected) {
                             Interface.setLoop(msg.getContent());
-                            System.out.println(this.getAid().name + ": Loop actualizado.");
+                            System.out.println(this.getAid().name + ": Secuencia actualizado.");
                             this.informOK(msg.getSender().name, msg.getConversationId(), msg.getReplyWith());       
                         } else{                     
                             System.out.println(this.getAid().name + ": Recibida conexión inicial desde " + msg.getSender().name + " ya recibida anteriormente. FINALIZANDO");
