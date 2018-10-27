@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Director;
+package MidiProcessor;
 
 import es.upv.dsic.gti_ia.core.AgentID;
 import es.upv.dsic.gti_ia.core.SingleAgent;
@@ -12,18 +12,18 @@ import es.upv.dsic.gti_ia.core.SingleAgent;
  *
  * @author Adri
  */
-public class DirectorAgent extends SingleAgent {
+public class MidiProcessorAgent extends SingleAgent {
 
-    public DirectorAgent(AgentID aid) throws Exception {
+    public MidiProcessorAgent(AgentID aid) throws Exception {
         super(aid);
     }
         
-    public void init() {     
+    public void init() {
         System.out.println("Agente "+this.getAid().name+" iniciado");
     }
      
     public void execute() {
-        
+         
     }
      
     public void finalize() {

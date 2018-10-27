@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Loop;
+package Sequencer;
 
 /**
  *
  * @author Adri
  * 
- * Esta clase se encarga de abstraer los loops que se reproducirán en el sistema.
+ * Esta clase se encarga de secuenciar los loops que se reproducirán en el sistema.
  * 
  */
-public class Loop {
+public class Sequencer {
     
 }

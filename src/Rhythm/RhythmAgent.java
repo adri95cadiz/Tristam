@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Instrument;
+package Rhythm;
 
 import es.upv.dsic.gti_ia.core.AgentID;
 import es.upv.dsic.gti_ia.core.SingleAgent;
@@ -11,13 +11,10 @@ import es.upv.dsic.gti_ia.core.SingleAgent;
 /**
  *
  * @author Adri
- * 
- * Este agente actúa como instrumento del sistema, creando las melodías y ritmos a partir de los parámetros deseados.
- * 
  */
-public class InstrumentAgent extends SingleAgent {
-
-    public InstrumentAgent(AgentID aid) throws Exception {
+public class RhythmAgent extends SingleAgent {
+   
+    public RhythmAgent(AgentID aid) throws Exception {
         super(aid);
     }
         
@@ -35,3 +32,4 @@ public class InstrumentAgent extends SingleAgent {
     }    
     
 }
+ 

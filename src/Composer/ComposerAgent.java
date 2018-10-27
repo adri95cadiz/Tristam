@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Combination;
+package Composer;
 
 import es.upv.dsic.gti_ia.core.AgentID;
 import es.upv.dsic.gti_ia.core.SingleAgent;
@@ -12,18 +12,18 @@ import es.upv.dsic.gti_ia.core.SingleAgent;
  *
  * @author Adri
  */
-public class CombinationAgent extends SingleAgent {
+public class ComposerAgent extends SingleAgent {
 
-    public CombinationAgent(AgentID aid) throws Exception {
+    public ComposerAgent(AgentID aid) throws Exception {
         super(aid);
     }
         
-    public void init() {
+    public void init() {     
         System.out.println("Agente "+this.getAid().name+" iniciado");
     }
      
     public void execute() {
-         
+        
     }
      
     public void finalize() {

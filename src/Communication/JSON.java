@@ -10,7 +10,7 @@ package Communication;
  * @author Adri
  */
 
-import Loop.*;
+import Sequencer.Sequencer;
 import Parameters.*;
 import com.eclipsesource.json.*;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class JSON {
         objeto.add("note",parametros.getNote());
         objeto.add("octave",parametros.getOctave());
         objeto.add("key",parametros.getKey());
-        objeto.add("key",parametros.getNum());
+        objeto.add("num",parametros.getNum());
         return objeto.toString();     
     }    
     
@@ -61,7 +61,7 @@ public class JSON {
         return num;     
     } 
     
-    public static String loops(ArrayList<Loop> loops, int num){    
+    public static String loops(ArrayList<Sequencer> loops, int num){    
         JsonObject objeto = new JsonObject();
         for(int i = 0; i<loops.size(); i++){
             objeto.add("loop"+i, JSON.loop(loops.get(i)));
@@ -70,9 +70,9 @@ public class JSON {
         return objeto.toString();
     }
     
-    public static ArrayList<Loop> loops (String jsonLoops){                  
+    public static ArrayList<Sequencer> loops (String jsonLoops){                  
         JsonObject objeto = Json.parse(jsonLoops).asObject();
-        ArrayList<Loop> loops = new ArrayList<>();
+        ArrayList<Sequencer> loops = new ArrayList<>();
         for(int i = 0; objeto.getString("loop"+i, null) != null ; i++){
             loops.add(JSON.loop(objeto.getString("loop"+i, null)));
         }
@@ -85,15 +85,15 @@ public class JSON {
         return num;
     }
     
-    public static String loop(Loop loop){    
+    public static String loop(Sequencer loop){    
         JsonObject objeto = new JsonObject();
         objeto.add("loop", 1);        
         return objeto.toString();
     }
     
-    public static Loop loop(String thisLoop){         
+    public static Sequencer loop(String thisLoop){         
         JsonObject objeto = Json.parse(thisLoop).asObject();
-        Loop loop = new Loop();        
+        Sequencer loop = new Sequencer();        
         objeto.getString("loop", null);
         return loop;
     }

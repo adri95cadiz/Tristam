@@ -5,10 +5,9 @@
  */
 package AgentLauncher;
 
+import MidiProcessor.MidiProcessorAgent;
+import Composer.*;
 import es.upv.dsic.gti_ia.core.AgentID;
-import Combination.*;
-import Director.*;
-import Filter.*;
 import Instrument.*;
 import Interface.*;
 import Listen.*;
@@ -23,9 +22,8 @@ import es.upv.dsic.gti_ia.core.AgentsConnection;
 public class AgentLauncher {
     
     public static void main(String[] args) throws Exception {
-        CombinationAgent Combination = null;
-        DirectorAgent Director = null;
-        FilterAgent Filter = null;
+        MidiProcessorAgent Combination = null;
+        ComposerAgent Director = null;
         InstrumentAgent Instrument = null;
         InterfaceAgent Interface = null;
         ListenAgent Listen = null;
@@ -34,9 +32,8 @@ public class AgentLauncher {
         AgentsConnection.connect("localhost", 5672, "test", "guest", "guest", false);
         
         try {
-            Combination = new CombinationAgent(new AgentID("Combination"));
-            Director = new DirectorAgent(new AgentID("Director"));
-            Filter = new MasterFilter(new AgentID("Filter"), Combination.getAid());
+            Combination = new MidiProcessorAgent(new AgentID("Combination"));
+            Director = new ComposerAgent(new AgentID("Director"));
             Instrument = new InstrumentAgent(new AgentID("Instrument"));
             Interface = new InterfaceAgent(new AgentID("Interface"));
             Listen = new ListenAgent(new AgentID("Listen"));
@@ -48,7 +45,6 @@ public class AgentLauncher {
         }
         Combination.start();
         Director.start();
-        Filter.start();
         Instrument.start();
         Interface.start();
         Listen.start();
